@@ -30,7 +30,11 @@ function copyRecursive(src, dest) {
         fs.mkdirSync(dest, { recursive: true });
         for (const file of fs.readdirSync(src)) {
             const srcPath = path.join(src, file);
-            const destPath = path.join(dest, file);
+            
+            const destPath = path.join(
+                dest,
+                file === '_gitignore' ? '.gitignore' : file
+            );
             copyRecursive(srcPath, destPath);
         }
     } else {
